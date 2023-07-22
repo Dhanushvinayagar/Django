@@ -1,0 +1,62 @@
+{% include 'navbar.html' %}
+
+<div style=" font-family:Georgia, 'Times New Roman', Times, serif; font-size:larger">
+   
+    <h1 style="color:crimson; font-size:x-larger">Todo</h1>
+    {% if success %}
+    <p>Your results:</p>
+    {% else %}
+    <form method="post" action="search/" >
+        {% csrf_token %}
+        <div style="align-content: center;">
+            <input type="text" name="name" style="border-radius: 5px; background-color:rgb(185, 212, 232)" />
+            <button type="submit" style="margin:5px;padding: 3px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 4px;">Search</button>
+        <br>
+    </form>
+    <form method="post" action="search/" >
+        {% csrf_token %}
+        <input type="text" list="Category-list" name="name" placeholder="Filter by name"  />
+        <datalist id="Category-list">
+        {% for d in todos %}
+            <option value="{{d.name}}" > 
+        {% endfor %}
+        </datalist>
+        <button type="submit" style="margin:5px;padding: 3px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 4px;">Filter</button>
+   
+    </form>
+    <form method="post" action="filter/" >
+        {% csrf_token %}
+        <div style="align-content: center;">
+           <button title="Filter you data by ascending order" type="submit" style="margin:5px;padding: 3px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 4px;">Sort</button>
+        <br>
+    </form>
+    {% endif %}
+    <table border="1" style ="text-align:center;border-color: rgb(78, 230, 222); border-radius:8px;padding:2px; margin:20px ">
+        <tr style ="background-color:rgb(104, 104, 222);padding:15px; margin:15px;">
+        <th> S.no</th>
+        <th>Task</th>
+        <th>Todo</th>
+        <th title="Edit the content ">Edit</th>
+        <th title="Delete the item">Delete</th>
+        </tr>
+        {% for todo in todos %}
+        <tr>
+            <td>{{todo.num}}</td>
+            <td>{{todo.name}}</td>
+            <td>{{todo.desc}}</td>
+            <td><a href="/edit/{{todo.id}}/"><button type="button" style="margin:5px;padding: 3px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 4px;">Edit</button></a>
+            </td>
+            <td> <a  href="/delete/{{todo.id}}/"><button type="button"  style="margin:5px;padding: 3px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 4px;">Delete</button>
+            </a></td>
+        </tr>
+        {% empty %}
+        <td colspan="5">No data found</td>
+        {% endfor %}
+        
+    </table>
+    
+    <a href="/add">
+    <button type="button" style="margin:20px;padding: 7px; border: radius 4px;color:white; background-color:rgb(100, 70, 249) ;border-radius: 8px;">Add todo</button>
+    </a>
+    
+</div>

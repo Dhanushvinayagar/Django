@@ -1,0 +1,20 @@
+{% include 'navbar.html' %}
+
+
+<form  action="update/" method="POST">
+    {% csrf_token %}
+    <div id="edit" style="text-align: center;font-size:large; background-color:rgb(167, 247, 220);margin: 180px 350px 75px 200px;padding:20px">
+    <label style="color: rgb(170, 21, 46); font-family:Verdana, Geneva, Tahoma, sans-serif">S.no     :</label>
+        <input style="border-radius: 5px; background-color:rgb(185, 212, 232)" type="text" name="num" placeholder="{{edit.num}}"/>
+        <br>
+        <label>           </label>
+        <label style="text-align:left;color: rgb(173, 125, 21);font-family:Verdana, Geneva, Tahoma, sans-serif">Name     :</label>
+        <input type="text" name="name" value="{{edit.name}}"style="border-radius: 5px; background-color:rgb(185, 212, 232)" />
+        <br>
+        
+        <label style="color: rgb(21, 136, 154);font-family:Verdana, Geneva, Tahoma, sans-serif">Description:</label>
+        <input type="textfield" placeholder="{{edit.desc}}"style="border-radius: 5px; background-color:rgb(185, 212, 232)" name="desc" />
+        <label>           </label>
+        <button type="submit" style="background-color:cadetblue ;margin:16px;padding:4px;color:white;border-radius:3px">Update</button>
+    </div>
+</form>
